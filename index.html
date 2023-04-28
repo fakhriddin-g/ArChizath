@@ -5,32 +5,76 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Inputs</title>
 </head>
 <body>
-  
-  <div class="buttons">
-    <button class="btn active">HTML</button>
-    <button class="btn">CSS</button>
-    <button class="btn">JavaScript</button>
+  <div class="container">
+    <div class="header_info">
+      <div>All: <span>15</span></div>
+      <div>Need: <span class="all_inputs">0</span></div>
+      <div>Success: <span class="success">8</span>
+      /
+      <span class="all_inputs">0</span>
+      </div>
+      <div>Error: <span class="error">4</span>
+      /
+      <span class="all_inputs">0</span>
+      </div>
+    </div>
+    
+    <form name="form">
+      <div class="input_box need-to-fill">
+        <label for="">Name<span class="sub">*</span></label>
+        <input class="input" type="text" name="name" placeholder="name">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">Age<span class="sub">*</span></label>
+        <input class="input" type="text" name="age" placeholder="age">
+      </div>
+      <div class="input_box">
+        <label for="">Surname</label>
+        <input class="input" type="text" name="name" placeholder="surname">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">About You<span class="sub">*</span></label>
+        <input class="input" type="text" name="text" placeholder="About You">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">Email Adress<span class="sub">*</span></label>
+        <input class="input" type="text" name="email" placeholder="Email Adress">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">What is JS?<span class="sub">*</span></label>
+        <input class="input" type="text" name="name" placeholder="What is JS?">
+      </div>
+      <div class="input_box">
+        <label for="">Phone number</label>
+        <input class="input" type="text" name="number" placeholder="Phone number">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">Password<span class="sub">*</span></label>
+        <input class="input" type="text" name="password" placeholder="Password">
+      </div>
+      <div class="input_box">
+        <label for="">Your Mom's name</label>
+        <input class="input" type="text" name="name" placeholder="Your Mom's name">
+      </div>
+      <div class="input_box need-to-fill">
+        <label for="">What is CSS?<span class="sub">*</span></label>
+        <input class="input" type="text" name="name" placeholder="What is CSS?">
+      </div>
+      <div class="input_box">
+        <label for="">Your Pap's name</label>
+        <input class="input" type="text" name="name" placeholder="Your Pap's name">
+      </div>
+      <div class="input_box">
+        <label for="">Your favourite car</label>
+        <input class="input" type="text" name="text" placeholder="Your favourite car">
+      </div>
+      <button>Save changes</button>
+    </form>
   </div>
 
-  <div class="content">
-    <div class="content_item">
-      <h2>HTML</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus repellendus harum labore. Sint debitis accusantium odit aut facere voluptas consequuntur necessitatibus numquam quod reiciendis repudiandae illum facilis architecto, ipsam nemo.</p>
-    </div>
-    <div class="content_item">
-      <h2>CSS</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus repellendus harum labore. Sint debitis accusantium odit aut facere voluptas consequuntur necessitatibus numquam quod reiciendis repudiandae illum facilis architecto, ipsam nemo.</p>
-    </div>
-    <div class="content_item">
-      <h2>JavaScript</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus repellendus harum labore. Sint debitis accusantium odit aut facere voluptas consequuntur necessitatibus numquam quod reiciendis repudiandae illum facilis architecto, ipsam nemo.</p>
-    </div>
-  </div>
-
-
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

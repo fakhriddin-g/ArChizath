@@ -1,31 +1,123 @@
-body{
-  width: 70%;
-  margin: 20px auto;
-}
-.buttons{
+.container{
+  width: 60%;
+  margin: 0 auto;
   text-align: center;
 }
-.btn{
-  padding: 10px 30px;
-  background-color: rgb(43, 226, 122, .6);
-  border-radius: 10px;
-  cursor: pointer;
-  border-style: none;
-}
-.active{
-  background-color: rgb(10, 197, 91);
-}
-.content{
+.header_info{
+  font-size: 18px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* animation: rotate 4s ease;
+  rotate: 360deg;
+  scale: 1; */
+}
+.input_box{
+  width: 50%;
+  position: relative;
+  margin-top: 5.5%;
+  /* animation: rotate 4s ease;
+  rotate: 360deg;
+  scale: 1; */
+}
+.input_box:nth-child(2n){
+  justify-content: start;
+  
+}
+.input_box label{
+  width: 100%;
+  position: absolute;
+  top: -55%;
+  text-align: left;
+  font-size: 18px;
+}
+input{
+  width: 80%;
+  height: 20px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(10, 10, 171, .7);
+  border-radius: 10px;
+  font-size: 18px;
+  color: rgb(10, 10, 171, .7);
+}
+::placeholder{
+  color: rgba(101, 101, 105, 0.3);
+}
+.need-to-fill{
+  position: relative;
+}
+.need-to-fill::after{
+  display: none;
+  content: "Need to fill";
+  position: absolute;
+  left: 10%;
+  top: 110%;
+  font-size: 12px;
+  color: red;
+  font-style: italic;
+}
+.need_fill::after{
+  display: block;
+}
+button{
+  width: 50%;
+  height: 60px;
+  margin-top: 4%;
+  border: 1px solid rgb(10, 10, 171, .5);
+  border-radius: 30px;
+  background-color: rgb(10, 10, 171, .4);
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+}
+.sub{
+  color: red;
 }
 
-.content_item{
-  width: 40%;
-  margin-top: 20px;
-  text-align: center;
-  border: 2px solid #3e22a1;
-  border-radius: 20px;
-  padding: 10px 20px;
+@keyframes rotate {
+  0%{
+    position: absolute;
+    scale: 0.2;
+    rotate: 0deg;
+
+    top: -100vh;
+    left: 50vh;
+  }
+  25%{
+    position: relative;
+    /* scale: 0.4; */
+
+    top: 0;
+    /* left: -50vh; */
+  }
+  50%{
+    position: relative;
+    /* scale: 0.6; */
+
+    top: -20vh;
+    left: 50vh;
+  }
+  75%{
+    position: relative;
+    /* scale: 0.8; */
+
+    top: 5vh;
+    /* left: 5vh; */
+  }
+  100%{
+    position: relative;
+    scale: 1;
+
+    top: 0;
+    left: 0;
+  }
 }
