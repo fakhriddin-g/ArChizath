@@ -1,0 +1,31 @@
+body{
+  width: 70%;
+  margin: 20px auto;
+}
+.buttons{
+  text-align: center;
+}
+.btn{
+  padding: 10px 30px;
+  background-color: rgb(43, 226, 122, .6);
+  border-radius: 10px;
+  cursor: pointer;
+  border-style: none;
+}
+.active{
+  background-color: rgb(10, 197, 91);
+}
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_item{
+  width: 40%;
+  margin-top: 20px;
+  text-align: center;
+  border: 2px solid #3e22a1;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
