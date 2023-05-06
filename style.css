@@ -96,8 +96,8 @@ button{
   border-radius: 20px 0 0 20px;
   position: fixed;
   top: 0;
-  /* right: -33%; */
-  right: 0;
+  right: -33%;
+  /* right: 0; */
   scale: 1;
   width: 33%;
   height: 100vh;

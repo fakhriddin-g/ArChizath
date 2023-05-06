@@ -1,4 +1,4 @@
-import product from './module/db.js'
+import products from './module/db.js'
 
 
 
@@ -11,39 +11,14 @@ let data_showFive = document.querySelector('button[data-show-five]')
 let data_showAll = document.querySelector('button[data-show-all]')
 let data_cart = document.querySelector('button[data-cart]')
 let bg = document.querySelector('.bg')
-
-
+// ================================
+let total_money = document.querySelector('.total_money')
 
 let icons = ['price', 'rate', 'count']
-let cart = [
-  {
-    "id": 1,
-    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    "price": 109.95,
-    "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    "category": "men's clothing",
-    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    "rating": {
-        "rate": 3.9,
-        "count": 120
-    }
-  },
-  {
-    "id": 1,
-    "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    "price": 109.95,
-    "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    "category": "men's clothing",
-    "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-    "rating": {
-        "rate": 3.9,
-        "count": 120
-    }
-  }
-]
+let cart = []
 
 reload(cart, cart_box_scroll)
-reloadCard(product, container)
+reloadCard(products, container)
 
 function reloadCard(arr, place) {
   place.innerHTML = ''
@@ -85,33 +60,37 @@ function reloadCard(arr, place) {
   
     item_div.append(img, description)
     description.append(h3, p, row, button)
-  
     place.append(item_div)
-  
+
+    
+    
     button.onclick = () => {
-      if(cart.includes(item.id)) {
-        cart = cart.filter(id => id !== item.id)
+      if(cart.includes(item)) {
+        cart = cart.filter(id => id !== item)
         button.classList.remove('add-to-mark')
         button.innerHTML = 'В избранное'
       } else {
-        cart.push(item.id)
+        cart.push(item)
         button.classList.add('add-to-mark')
         button.innerHTML = 'Добавлено'
-        reload(cart, cart_box_scroll)
+        total_money += item.price
       }
+      // total_money.innerHTML = total_money
 
+      if (cart.length == 0) {
+        total_money.innerHTML = 0 + ' $'
+      }
+      
+      reload(cart, cart_box_scroll)
       amount.innerHTML = cart.length
-      console.log(cart);
     }
   }
 }
 
 function reload(arr, place) {
+  place.innerHTML = ''
+
   for (const element of arr) {
-    let top_cart = document.createElement('div')
-    let top_cart_h3 = document.createElement('h3')
-    let cart_box = document.createElement('div')
-    let cart_box_scroll = document.createElement('div')
     // Shopped Item
     let cart_item = document.createElement('div')
     let item_checkbox = document.createElement('input')
@@ -131,16 +110,8 @@ function reload(arr, place) {
     let item_increase = document.createElement('span')
     let item_price = document.createElement('div')
     let discount_price = document.createElement('div')
-    let rate = document.createElement('div')
-    let top = document.createElement('div')
-    let rate_title = document.createElement('span')
-    let rate_all_price = document.createElement('span')
-    let rate_button = document.createElement('button')
   
   
-    top_cart.classList.add('top-cart')
-    cart_box.classList.add('cart-box')
-    cart_box_scroll.classList.add('cart-box-scroll')
     cart_item.classList.add('cart-item')
     item_img.classList.add('item-img')
     product.classList.add('product')
@@ -153,44 +124,58 @@ function reload(arr, place) {
     item_increase.classList.add('item-increase')
     item_price.classList.add('item-price')
     discount_price.classList.add('discount-price')
-    rate.classList.add('rate')
-    top.classList.add('top')
-    rate_button.classList.add('order')
   
-    top_cart_h3.innerHTML = 'Корзина'
     item_checkbox.type = 'checkbox'
+    item_checkbox.checked = true
     item_img.src = element.image
-    item_title_h3.innerHTML = 'Fjallraven - Foldsac'
+    item_title_h3.innerHTML = element.title.slice(0,28)
     item_title_button_img.src = './public/icon/count.svg'
     item_title_button_span.innerHTML = 'Удалить'
-    item_color.innerHTML = 'Чёрный'
+    item_color.innerHTML = ''
     item_decrease.innerHTML = '-'
-    item_input.type.text
+    item_input.value = '1'
     item_increase.innerHTML = '+'
-    discount_price.innerHTML = '109.95 $'
-    rate_title.innerHTML = 'Общая сумма:'
-    rate_all_price.innerHTML = '1000 $'
-    rate_button.innerHTML = 'Заказать'
+    discount_price.innerHTML = element.price + ' $'
   
   
-    cart_box_scroll.append(cart_item)
-    cart_item.append(item_checkbox, item_img, product)
-    product.append(item_title, item_info)
+    product.append(item_title, item_info, item_counter, item_price)
     item_title.append(item_title_h3, item_title_button)
     item_title_button.append(item_title_button_img, item_title_button_span)
     item_info.append(product_info, item_counter, item_price)
     product_info.append(item_color)
     item_counter.append(item_decrease, item_input, item_increase)
     item_price.append(discount_price)
-    top.append(rate_title, rate_all_price)
-  
-    top_cart.append(top_cart_h3)
-    cart_box.append(cart_box_scroll)
-    rate.append(top, rate_button)
-  
+
+    cart_item.append(item_checkbox, item_img, product)
     place.append(cart_item)
+
+
+    item_decrease.onclick = () => {
+      if (item_input.value > 1) {
+        item_input.value--
+        discount_price.innerHTML = ((item_input.value * element.price).toFixed(2)) + ' $'
+        total_money.innerHTML = discount_price.innerHTML
+      } else{
+        item_input.value
+      }
+    }
+    item_increase.onclick = () => {
+      if (item_input.value < element.rating.count) {
+        item_input.value++
+        discount_price.innerHTML = ((item_input.value * element.price).toFixed(2)) + ' $'
+        total_money.innerHTML = discount_price.innerHTML
+      }else{
+        item_input.value = element.rating.count
+      }
+    }
+
+    
+
+    item_title_button.onclick = () => {
+      cart_item.remove()
+    }
+
   }
-  
 }
 
 
@@ -198,10 +183,10 @@ function reload(arr, place) {
 
 // ===========================================
 data_showFive.onclick = () => {
-  reloadCard(product.slice(0,5), container)
+  reloadCard(products.slice(0,5), container)
 }
 data_showAll.onclick = () => {
-  reloadCard(product, container)
+  reloadCard(products, container)
 }
 
 // ===========================================
