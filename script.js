@@ -152,7 +152,7 @@ function reload() {
     itemTitleButtonSpan.innerHTML = 'Удалить'
     itemColor.innerHTML = ''
     itemDecrease.innerHTML = '-'
-    itemInput.value = '1'
+    itemInput.value = item.qt
     itemIncrease.innerHTML = '+'
     discountPrice.innerHTML = item.price * item.qt + ' $'
   
@@ -175,24 +175,26 @@ function reload() {
       } else {
         allPrices -= item.price * item.qt
       }
-
-      totalMoney.innerHTML = `${allPrices.toLocaleString('tj-TJ')} $`
+      updateTotal()
     }
 
     itemDecrease.onclick = () => {
       if (itemInput.value > 1) {
         itemInput.value--
         item.qt = itemInput.value
-        allPrices += item.price * item.qt
+        allPrices -= item.price
+        discountPrice.innerHTML = item.price * item.qt + ' $'
+        updateTotal()
       }
     }
 
     itemIncrease.onclick = () => {
       if (itemInput.value < item.rating.count) {
         itemInput.value++
-        allPrices += item.price * item.qt
-        discountPrice.innerHTML = allPrices
-        totalMoney.innerHTML = `${allPrices.toLocaleString('tj-TJ')} $`
+        item.qt = itemInput.value
+        allPrices += item.price
+        discountPrice.innerHTML = item.price * item.qt + ' $'
+        updateTotal()
       }
     }
 
@@ -208,18 +210,18 @@ function reload() {
 
     form.onsubmit = (event) => {
       event.preventDefault()
-    
       modalBtn.onclick = () => {
         saveChanges(temp)
       }
-
     }
-    
     
     reloadCard(products, container)
   }
   
-  totalMoney.innerHTML = `${allPrices.toLocaleString('tj-TJ')} $`
+  function updateTotal() {
+    totalMoney.innerHTML = `${allPrices.toLocaleString('tj-TJ')} $`
+  }
+  updateTotal()
 }
 
 orderBtn.onclick = () => {
