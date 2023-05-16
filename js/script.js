@@ -1,76 +1,136 @@
-/* Задания на урок:
+import films from "../module/db.js"
+let movies = films
 
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
+let promoBg = document.querySelector('.promo__bg')
+let promoGenre = document.querySelector('.promo__genre')
+let promoTitle = document.querySelector('.promo__title')
+let promoDescription = document.querySelector('.promo__descr')
+let imbdRating = document.querySelector('.imbd-rating')
+let kinopoiskRating = document.querySelector('.kinopoisk-rating')
 
-2) Изменить жанр фильма, поменять "комедия" на "драма"
+// Modal
+let modal = document.querySelector('.modal')
+let movieName = document.querySelector('.movie-name')
+let img = document.querySelector('.modal-img')
+let country = document.querySelector('.country')
+let duration = document.querySelector('.duration')
+let released = document.querySelector('.released')
+let genre = document.querySelector('.genre')
+let director = document.querySelector('.director')
+let lang = document.querySelector('.lang')
+let writer = document.querySelector('.writer')
+let actors = document.querySelector('.actors')
+let plot = document.querySelector('.plot')
+let closeBg = document.querySelector('.bg')
 
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
+closeBg.onclick = () => {
+  modal.style.display = 'none'
+  closeBg.style.display = 'none'
+}
 
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
+let promoInteractiveList = document.querySelector('.promo__interactive-list')
+let promoMenuList = document.querySelector('.promo__menu-list ul')
+let searchInput = document.querySelector('#search')
 
-5) Добавить нумерацию выведенных фильмов */
+searchInput.onkeyup = () => {
+  let val = searchInput.value.toLowerCase().trim()
+  console.log(val);
 
-'use strict';
-
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
-
-// #1
-const promoAdv = document.querySelector('.promo__adv')
-// promoAdv.style.display = 'none'
-const promoImg = document.querySelectorAll('img')
-const promoTitle = document.querySelector('.promo__adv-title')
-
-promoImg.forEach(item => {
-    if(!promoAdv.innerHTML.includes('img')) {
-        item.remove()
-        promoTitle.remove()
+  let filtred = movies.filter(movie => {
+    let title = movie.Title.toLowerCase().trim()
+    if (title.includes(val)) {
+      return movie
     }
-})
+  })
 
-// #2 #3
-const promoContent = document.querySelector('.promo__content .promo__genre')
-const promoBg = document.querySelector('.promo__content .promo__bg')
-promoContent.innerHTML = "драма"
-promoBg.style.background = "url(./img/bg.jpg)"
-promoBg.style.backgroundSize = "cover"
+  reload(filtred, promoInteractiveList)
+}
 
-// #4
+let genres = []
 
-// #5
-const tabs = document.querySelectorAll('.promo__menu-item')
-tabs.forEach(item => {
-    item.onclick = () => {
-        tabs.forEach(item => item.classList.remove('promo__menu-item_active'))
-        item.classList.add('promo__menu-item_active')
+function reload(arr, place) {
+  place.innerHTML = ''
+  setMovie(arr[0])
+
+  for (let item of arr) {
+
+    let promoInteractiveItem = document.createElement('li')
+    let del = document.createElement('div')
+
+    promoInteractiveItem.classList.add('promo__interactive-item')
+    del.classList.add('delete')
+
+    promoInteractiveItem.innerHTML = item.Title
+
+    promoInteractiveItem.append(del)
+    place.append(promoInteractiveItem)
+
+
+    promoInteractiveItem.onclick = () => {
+      setMovie(item)
+      modalMovie(item)
     }
-})
 
-// #6
-const deleteFilms = document.querySelectorAll('.delete')
-
-deleteFilms.forEach(item => {
-    item.onclick = () => {
-        // item.parentElement.style.display = "none"
-        item.parentElement.remove('li')
+    del.onclick = () => {
+      movies = movies.filter(el => el.ID !== item.ID)
+      del.parentElement.remove()
+      console.log(movies);
     }
-})
 
-// #7
-const seenFilm = document.querySelectorAll('.promo__interactive-item')
-const filmTitle = document.querySelector('.promo__title')
-seenFilm.forEach(film => {
-    film.style.cursor = 'pointer'
-    film.onclick = () => {
-        filmTitle.innerHTML = film.innerHTML
+    genres.push(item.Genre)
+  }
+
+  genres = [...new Set(genres)]
+}
+
+function setMovie(item) {
+  promoBg.style.background = `url("${item.Poster}")`
+  promoBg.style.backgroundSize = "cover"
+  promoGenre.innerHTML = item.Genre
+  promoTitle.innerHTML = item.Title
+  promoDescription.innerHTML = item.Plot
+  imbdRating.innerHTML = 'IMDb: ' + item.imdbRating
+  kinopoiskRating.innerHTML = 'Кинопоиск: ' + item.Metascore
+}
+
+function modalMovie(item) {
+  modal.style.display = 'block'
+  closeBg.style.display = 'block'
+  movieName.innerHTML = `${item.Title}`
+  img.style.background = `url("${item.Poster}")`
+  img.style.backgroundSize = "cover"
+  img.style.backgroundPosition = "center"
+  country.innerHTML = `Страна: ${item.Country}`
+  duration.innerHTML = `Длительность: ${item.Runtime}`
+  released.innerHTML = `Дата выход: ${item.Released}`
+  genre.innerHTML = `Жанр: ${item.Genre}`
+  director.innerHTML = `Продюсер: ${item.Director}`
+  lang.innerHTML = `Язык: ${item.Language}`
+  writer.innerHTML = `Продюсеры: ${item.Writer}`
+  actors.innerHTML = `Актёры: ${item.Actors}`
+  plot.innerHTML = `О фильме: ${item.Plot}`
+}
+
+reload(movies.sort((a,b) => a.Title - b.Title ? 1 : -1), promoInteractiveList)
+
+function reloadGenre(arr, place) {
+  for (let item of arr) {
+    let promoMenuItem = document.createElement('li')
+
+    promoMenuItem.classList.add('promo__menu-item')
+    promoMenuItem.onclick = () => {
+      ul.forEach(item => item.classList.remove('promo__menu-item_active'));
+      promoMenuItem.classList.add('promo__menu-item_active')
+      let filtred = movies.filter(movie => movie.Genre === item)
+      reload(filtred, promoInteractiveList)
     }
-})
+
+    promoMenuItem.innerHTML = item
+
+    place.append(promoMenuItem)
+  }
+
+  let ul = place.querySelectorAll('li')
+}
+
+reloadGenre(genres, promoMenuList)
