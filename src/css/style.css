@@ -87,6 +87,7 @@ th{
 table td{
   padding: 20px 0;
   border-top: 1px solid blue;
+  box-shadow: 0px 3px rgb(0, 0, 255, .1);
 }
 
 table th{
