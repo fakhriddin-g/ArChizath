@@ -61,6 +61,7 @@ function reloadTable(arr, place) {
 
     deleteBtn.onclick = () => {
       tableDataArr = tableDataArr.filter(el => el.id !== item.id)
+      
       reloadTable(tableDataArr, tableBody)
     }
 
@@ -69,21 +70,21 @@ function reloadTable(arr, place) {
       modalBg.style.display = 'block'
       modalNameInput.value = item.name
       modalAgeInput.value = item.age
-      editeArr.push(item.id)
-      console.log(editeArr);
-      console.log(item);
+
+      editeArr.push(item)
     }
 
     modalAddBtn.onclick = () => {
-      editeArr.filter(id => {
-        if (item.id === id) {
-          item.name = modalNameInput.value
-          item.age = modalAgeInput.value
-          reloadTable(tableDataArr, tableBody)
-          modal.style.display = 'none'
-          modalBg.style.display = 'none'
-        }
-      })
+      for (const el of editeArr) {
+        el.name = modalNameInput.value
+        el.age = modalAgeInput.value
+      }
+      reloadTable(tableDataArr, tableBody)
+
+      modal.style.display = 'none'
+      modalBg.style.display = 'none'
+
+      console.log(tableDataArr);
     }
 
     modalBg.onclick = () => {
@@ -93,3 +94,5 @@ function reloadTable(arr, place) {
     }
   }
 }
+
+console.log(tableDataArr);
