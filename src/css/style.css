@@ -1,0 +1,112 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  background: rgb(150, 155, 152);
+}
+
+button{
+  cursor: pointer !important;
+}
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+header{
+  background: blue;
+  padding: 20px 50px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 15px 20px rgb(0, 0, 255, .2);
+}
+
+header h1{
+  font-size: 40px;
+  color: rgb(255, 255, 255);
+}
+
+.row{
+  margin: 50px 0 30px;
+}
+
+.form{
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.form-input{
+  outline: none;
+  border: 1px solid white;
+  background-color: rgb(223, 235, 241);
+  padding: 10px 10px;
+  border-radius: 5px;
+  width: 300px;
+  font-size: 16px;
+  box-shadow: 10px 15px rgb(128, 128, 128, .3);
+}
+
+.name::before{
+  content: "Имя";
+}
+
+.age::before{
+  content: "Возраст";
+}
+
+.name::before, .age::before{
+  position: absolute;
+  top: -23px;
+  font-size: 18px;
+}
+
+.add-btn{
+  all: unset;
+  background-color: rgb(0, 0, 255, .8);
+  box-shadow: 10px 15px rgb(0, 0, 255, .2);
+  color: white;
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: 1px solid white;
+  font-size: 18px;
+}
+
+table{
+  width: 100%;
+}
+
+th{
+  padding: 20px 0;
+}
+
+table td{
+  padding: 20px 0;
+  border-top: 1px solid blue;
+}
+
+table th{
+  text-align: start;
+}
+
+.modal{
+  position: fixed;
+  top: 40%;
+  left: 20%;
+  display: none;
+  z-index: 1;
+}
+
+.bg{
+  width: 100%;
+  height: 100vh;
+  background: rgb(0, 0, 0, .8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}

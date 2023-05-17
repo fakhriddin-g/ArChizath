@@ -4,9 +4,53 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="./src/css/style.css">
+  <title>Добавление, изменение и удаление элемента из таблицы</title>
 </head>
 <body>
   
+  <div class="container">
+    <header>
+      <h1>Добавление, изменение и удаление элемента из таблицы</h1>
+    </header>
+    <div class="row">
+      <form class="form" name="form">
+        <label class="name">
+          <input class="form-input name-input" type="text" placeholder="Bruce Lee" name="name">
+        </label>
+        <label class="age">
+          <input class="form-input age-input" type="text" placeholder="24" name="age">
+        </label>
+        <button class="add-btn">Показать</button>
+      </form>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>Имя студента</th>
+          <th>Год рождения</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="modal">
+      <div class="row">
+        <div class="form" name="form">
+          <label class="name">
+            <input class="form-input name-input" type="text" placeholder="Bruce Lee" name="name">
+          </label>
+          <label class="age">
+            <input class="form-input age-input" type="text" placeholder="24" name="age">
+          </label>
+          <button class="add-btn">Показать</button>
+        </div>
+      </div>
+    </div>
+    <div class="bg"></div>
+  </div>
+
+  <script src="./src/js/script.js"></script>
 </body>
 </html>
