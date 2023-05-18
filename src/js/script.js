@@ -4,10 +4,12 @@ let tableBody = document.querySelector('tbody')
 let modal = document.querySelector('.modal')
 let modalBg = document.querySelector('.bg')
 // Form
-let formInput = document.querySelectorAll('.form-input')
+let nameInput = document.querySelector('.form .name-input')
 let modalNameInput = document.querySelector('.modal .name-input')
 let modalAgeInput = document.querySelector('.modal .age-input')
 let modalAddBtn = document.querySelector('.modal .add-btn')
+
+console.log(nameInput);
 
 let tableDataArr = []
 
@@ -32,14 +34,12 @@ function save() {
 
 form.onsubmit = (event) => {
   event.preventDefault()
-
-  // formInput.forEach(input => {
-  //   if (input.value) {
-  //   }
-  // })
   
-  save()
-  reloadTable(tableDataArr, tableBody)
+  if (nameInput.value) {
+    save()
+    reloadTable(tableDataArr, tableBody)
+  }
+    
   console.log(tableDataArr);
 }
 
