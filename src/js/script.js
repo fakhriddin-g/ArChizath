@@ -4,6 +4,7 @@ let tableBody = document.querySelector('tbody')
 let modal = document.querySelector('.modal')
 let modalBg = document.querySelector('.bg')
 // Form
+let formInput = document.querySelectorAll('.form-input')
 let modalNameInput = document.querySelector('.modal .name-input')
 let modalAgeInput = document.querySelector('.modal .age-input')
 let modalAddBtn = document.querySelector('.modal .add-btn')
@@ -12,7 +13,8 @@ let tableDataArr = []
 
 function save() {
   let data = {
-    id: Math.random()
+    id: Math.random(),
+    year: new Date().getFullYear()
   }
 
   let fm = new FormData(form)
@@ -25,12 +27,17 @@ function save() {
     ...data,
     number: tableDataArr.length
   })
-  // console.log(data);
+  console.log(data);
 }
 
 form.onsubmit = (event) => {
   event.preventDefault()
 
+  // formInput.forEach(input => {
+  //   if (input.value) {
+  //   }
+  // })
+  
   save()
   reloadTable(tableDataArr, tableBody)
   console.log(tableDataArr);
@@ -51,7 +58,7 @@ function reloadTable(arr, place) {
 
     tableNumber.innerHTML = item.number + 1
     tableName.innerHTML = item.name
-    tableBirth.innerHTML = item.age
+    tableBirth.innerHTML = item.year - item.age
     editeBtn.innerHTML = 'Edite'
     deleteBtn.innerHTML = 'Delite'
 
