@@ -27,7 +27,7 @@ function save() {
   delete data.age
 
   tableDataArr.push(data)
-  console.log(data);
+  // console.log(data);
 }
 
 form.onsubmit = (event) => {
@@ -39,7 +39,7 @@ form.onsubmit = (event) => {
   }
   
   form.reset()
-  console.log(tableDataArr);
+  // console.log(tableDataArr);
 }
 
 function reloadTable(arr, place) {
@@ -90,7 +90,7 @@ function reloadTable(arr, place) {
       modal.style.display = 'none'
       modalBg.style.display = 'none'
 
-      console.log(tableDataArr);
+      // console.log(tableDataArr);
     }
 
     modalBg.onclick = () => {
