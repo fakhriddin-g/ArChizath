@@ -9,14 +9,12 @@ let modalNameInput = document.querySelector('.modal .name-input')
 let modalAgeInput = document.querySelector('.modal .age-input')
 let modalAddBtn = document.querySelector('.modal .add-btn')
 
-console.log(nameInput);
-
 let tableDataArr = []
 
 function save() {
   let data = {
     id: Math.random(),
-    year: new Date().getFullYear()
+    // year: new Date().getFullYear()
   }
 
   let fm = new FormData(form)
@@ -25,10 +23,10 @@ function save() {
     data[key] = value
   })
 
-  tableDataArr.push({
-    ...data,
-    number: tableDataArr.length
-  })
+  data.yearOfBearth = new Date().getFullYear() - data.age
+  delete data.age
+
+  tableDataArr.push(data)
   console.log(data);
 }
 
@@ -39,7 +37,8 @@ form.onsubmit = (event) => {
     save()
     reloadTable(tableDataArr, tableBody)
   }
-    
+  
+  form.reset()
   console.log(tableDataArr);
 }
 
@@ -56,9 +55,9 @@ function reloadTable(arr, place) {
     let editeBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
 
-    tableNumber.innerHTML = item.number + 1
+    tableNumber.innerHTML = tableDataArr.indexOf(item) + 1
     tableName.innerHTML = item.name
-    tableBirth.innerHTML = item.year - item.age
+    tableBirth.innerHTML = item.yearOfBearth
     editeBtn.innerHTML = 'Edite'
     deleteBtn.innerHTML = 'Delite'
 
@@ -76,7 +75,7 @@ function reloadTable(arr, place) {
       modal.style.display = 'block'
       modalBg.style.display = 'block'
       modalNameInput.value = item.name
-      modalAgeInput.value = item.age
+      modalAgeInput.value = new Date().getFullYear() - item.yearOfBearth
 
       editeArr.push(item)
     }
@@ -84,7 +83,7 @@ function reloadTable(arr, place) {
     modalAddBtn.onclick = () => {
       for (const el of editeArr) {
         el.name = modalNameInput.value
-        el.age = modalAgeInput.value
+        el.yearOfBearth = new Date().getFullYear() -  modalAgeInput.value
       }
       reloadTable(tableDataArr, tableBody)
 
@@ -101,5 +100,3 @@ function reloadTable(arr, place) {
     }
   }
 }
-
-console.log(tableDataArr);
