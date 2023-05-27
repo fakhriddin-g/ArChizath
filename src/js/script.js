@@ -27,7 +27,7 @@ function save() {
   delete data.age
 
   tableDataArr.push(data)
-  // console.log(data);
+  // console.log(data);totalPrice
 }
 
 form.onsubmit = (event) => {
