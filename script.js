@@ -1,15 +1,24 @@
+let baseURL = "http://localhost:9999"
+
+const getAllData = () => {
+  fetch(baseURL + "/todos")
+    .then(res => res.json())
+    .then(data => reload(data))
+}
+
+getAllData()
+
 let todoText = document.querySelector('#todo-text')
 let addTodo = document.querySelector('#add-todo')
 let form = document.forms.form
 
 
-
 let container = document.querySelector('.container')
 
-let todos = []
+// let todos = []
 
-function reload(arr, place) {
-  place.innerHTML = ''
+function reload(arr) {
+  container.innerHTML = ''
   
   for (const item of arr) {
     let todoBox = document.createElement('div')
@@ -29,7 +38,7 @@ function reload(arr, place) {
     
     todoBox.append(todoTitle, img)
     todoTitle.append(h2, span)
-    place.append(todoBox)
+    container.append(todoBox)
 
     item.isDone = false
     h2.onclick = () => {
@@ -42,7 +51,6 @@ function reload(arr, place) {
         h2.style.opacity = '1'
         h2.style.textDecoration = 'none'
       }
-      console.log(todos);
     }
 
     img.onclick = () => {
@@ -75,8 +83,20 @@ function save() {
     task[key] = value
   })
 
-  todos.push(task)
-  reload(todos, container)
+  createNewTask(task)
+}
 
-  console.log(todos);
+const createNewTask = (body) => {
+  fetch(baseURL + "/todos", {
+    method: "post",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => {
+    if (res.status === 200 || res.status === 201) {
+      getAllData()
+    }
+  })
 }
